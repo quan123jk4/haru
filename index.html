@@ -163,12 +163,13 @@
 
     function playMusic() {
       const audio = document.getElementById('audioPlayer');
+      audio.currentTime = 59; // Đặt thời gian phát ban đầu là giây thứ 59
       audio.play();
     }
 
     function handleButtonClick() {
       generateRandomNotifications();
-      setTimeout(playMusic, 59000); // Phát nhạc sau 59 giây
+      playMusic(); // Phát nhạc ngay khi nhấn nút, bắt đầu từ giây thứ 59
     }
 
     function minimizeNotification(button) {
