@@ -126,7 +126,7 @@
 
 <body>
   <h1>Anh có điều muốn nói</h1>
-  <button onclick="generateRandomNotifications();playMusic()">Nhấn đây nè</button>
+  <button onclick="handleButtonClick()">Nhấn đây nè</button>
   
   <!-- Thêm đối tượng âm thanh vào đây -->
   <audio id="audioPlayer" src="TranBoNho-DuongDomic-16783111.mp3" style="display: none;"></audio>
@@ -164,6 +164,11 @@
     function playMusic() {
       const audio = document.getElementById('audioPlayer');
       audio.play();
+    }
+
+    function handleButtonClick() {
+      generateRandomNotifications();
+      setTimeout(playMusic, 59000); // Phát nhạc sau 59 giây
     }
 
     function minimizeNotification(button) {
