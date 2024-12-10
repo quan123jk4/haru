@@ -164,12 +164,19 @@
     function playMusic() {
       const audio = document.getElementById('audioPlayer');
       audio.currentTime = 59; // Đặt thời gian phát ban đầu là giây thứ 59
-      audio.play();
+      audio.play(); // Bắt đầu phát âm thanh
     }
 
     function handleButtonClick() {
       generateRandomNotifications();
-      playMusic(); // Phát nhạc ngay khi nhấn nút, bắt đầu từ giây thứ 59
+      
+      const audio = document.getElementById('audioPlayer');
+      audio.addEventListener('canplaythrough', () => {
+        audio.currentTime = 59; // Đặt thời gian phát ban đầu là giây thứ 59 sau khi tệp âm thanh đã sẵn sàng
+        audio.play(); // Bắt đầu phát âm thanh
+      }, { once: true });
+
+      audio.load(); // Tải lại tệp âm thanh để đảm bảo sự kiện canplaythrough được kích hoạt
     }
 
     function minimizeNotification(button) {
