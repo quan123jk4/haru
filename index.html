@@ -126,36 +126,56 @@
 
 <body>
   <h1>Anh có điều muốn nói</h1>
-  <button onclick="generateRandomNotifications()">Nhấn đây nè</button>
+  <button onclick="generateRandomNotifications();playMusic()">Nhấn đây nè</button>
   <script>
     const messages = ["Nhớ nhớ nhớ em!"];
 
     function generateRandomNotifications() {
-      const notificationCount = 100;
+  const notificationCount = 100;
 
-      for (let i = 0; i < notificationCount; i++) {
-        setTimeout(() => {
-          const notification = document.createElement('div');
-          notification.className = 'notification';
+  for (let i = 0; i < notificationCount; i++) {
+    setTimeout(() => {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
 
-          const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-          notification.innerHTML = `
-            <div class="notification-header">
-              <button class="minimize-btn" onclick="minimizeNotification(this)">–</button>
-              <span>Tràn ngập bộ</span>
-            </div>
-            <p>${randomMessage}</p>
-          `;
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      notification.innerHTML = `
+        <div class="notification-header">
+          <button class="minimize-btn" onclick="minimizeNotification(this)">–</button>
+          <span>Tràn ngập bộ</span>
+        </div>
+        <p>${randomMessage}</p>
+      `;
 
-          const x = Math.random() * (window.innerWidth - 240);
-          const y = Math.random() * (window.innerHeight - 160);
-          notification.style.left = `${x}px`;
-          notification.style.top = `${y}px`;
+      const x = Math.random() * (window.innerWidth - 240);
+      const y = Math.random() * (window.innerHeight - 160);
+      notification.style.left = `${x}px`;
+      notification.style.top = `${y}px`;
 
-          document.body.appendChild(notification);
-        }, i * 200);
-      }
-    }
+      document.body.appendChild(notification);
+    }, i * 200);
+  }
+}
+
+function playMusic() {
+  // Tạo một iframe để phát video YouTube
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.youtube.com/embed/qRuSS93OEfw?autoplay=1';
+  iframe.width = '560';
+  iframe.height = '315';
+  iframe.frameBorder = '0';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+
+  // Thêm iframe vào body để phát nhạc
+  document.body.appendChild(iframe);
+}
+
+document.querySelector("button").addEventListener("click", function() {
+  generateRandomNotifications(); // Tạo thông báo
+  playMusic(); // Phát nhạc
+});
+    
 
     function minimizeNotification(button) {
       const notification = button.closest('.notification');
