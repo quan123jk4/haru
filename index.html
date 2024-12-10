@@ -161,13 +161,18 @@
       }
     }
 
-    function handleButtonClick() {
-      generateRandomNotifications();
+   function handleButtonClick() {
+  generateRandomNotifications();
 
-      const audio = document.getElementById('audioPlayer');
-      audio.currentTime = 59; // Đặt thời gian phát là giây thứ 59
-      audio.play(); // Phát âm thanh
-    }
+  const audio = document.getElementById('audioPlayer');
+
+  audio.addEventListener('canplaythrough', () => {
+    audio.currentTime = 59; // Đặt thời gian phát là giây thứ 59
+    audio.play(); // Phát âm thanh
+  }, { once: true });
+
+  audio.load(); // Tải lại tệp âm thanh để đảm bảo trình duyệt xử lý đúng
+}
 
     function minimizeNotification(button) {
       const notification = button.closest('.notification');
